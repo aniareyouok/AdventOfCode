@@ -1002,25 +1002,27 @@ const input = `101001100010
 let gammaRate = "";
 let epsilonRate =  "";
 
+// How many zero's or one's
 let zero = 0;
 let one = 0;
 
-
-
-// de input wordt gesplit per regel en in een array geplaatst
+// creating an array where each line is an element
 let newArray = input.split("\n");
-// een loop loop door de nieuwe array, elk regel is een entry oftewel i
 
+//starting a 'horizontal loop' (from left to right)
 for (let i=0; i < newArray[0].length; i++) {
+    // starting a 'vertical loop' (every line is checked)
     for (let j = 0; j < newArray.length; j++) {
+        //positioning
         let digit = newArray[j].charAt(i)
-
+         //counting zero's and one's
         if (parseInt(digit) === 0) {
             zero++
         } else {
             one++
         }
     }
+    //stacking values to gammaRate and epsilonRate
     if(zero > one) {
         gammaRate += "0"
         epsilonRate += "1"
@@ -1028,11 +1030,12 @@ for (let i=0; i < newArray[0].length; i++) {
         gammaRate += "1"
         epsilonRate += "0"
     }
-
+    //zero and one counters reset before we loop
     zero = 0;
     one = 0;
 }
 
+//gammaRate and epsilon becomes integers/decimals and are multiplied
 const powerConsumption = parseInt(gammaRate, 2)*parseInt(epsilonRate, 2)
 
 console.log(`Dag 3------------------\n`)
@@ -1042,6 +1045,7 @@ console.log(`Power Consumption: ${powerConsumption}\n`)
 
 //OXYGEN GENERATOR RATING
 
+//looping just like in task 1 counting zero's and one's per vertical line
 for (let i=0; i < newArray[0].length; i++) {
     for (let j = 0; j < newArray.length; j++) {
         let digit = newArray[j].charAt(i)
@@ -1052,6 +1056,7 @@ for (let i=0; i < newArray[0].length; i++) {
             one++
         }
     }
+    //
     const biggest = newArray.filter(checkBiggest)
 
     function checkBiggest(number) {
@@ -1109,5 +1114,4 @@ let c02ScrubberRating = parseInt(newArray[0], 2)
 console.log(`Task 2: \nOxygen Generator Rating: ${oxygenGeneratorRating}`)
 console.log(`CO2 Scrubber Rating: ${c02ScrubberRating}`)
 console.log(`Life Support Rating: ${oxygenGeneratorRating*c02ScrubberRating}`)
-
 
